@@ -3,6 +3,7 @@ mod lang;
 mod menu;
 mod notify;
 mod settings;
+mod version_check;
 
 #[cfg(windows)]
 use anyhow::Result;
@@ -20,6 +21,8 @@ use winit::{
 };
 
 use crate::{headset_control::BatteryState, notify::Notifier};
+use std::sync::mpsc;
+
 struct AppState {
     tray_icon: TrayIcon,
     devices: Vec<headset_control::Device>,
@@ -29,6 +32,7 @@ struct AppState {
 
     last_update: Instant,
     should_update_icon: bool,
+    update_receiver: Option<mpsc::Receiver<bool>>,
 }
 
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -67,6 +71,9 @@ impl AppState {
 
         let notifier = Notifier::new().context("initializing notifier")?;
 
+        // Check for updates in the background (non-blocking)
+        let update_receiver = version_check::check_for_updates_async(VERSION);
+
         Ok(Self {
             tray_icon,
             context_menu,
@@ -76,6 +83,7 @@ impl AppState {
             devices: vec![],
             last_update: Instant::now(),
             should_update_icon: true,
+            update_receiver: Some(update_receiver),
         })
     }
 
@@ -175,6 +183,20 @@ impl ApplicationHandler<()> for AppState {
     }
 
     fn about_to_wait(&mut self, event_loop: &ActiveEventLoop) {
+        // Check if update check has completed (non-blocking)
+        if let Some(receiver) = &self.update_receiver {
+            if let Ok(has_update) = receiver.try_recv() {
+                self.update_receiver = None; // Stop checking
+
+                if has_update {
+                    info!("Update available");
+                    if let Err(e) = self.context_menu.show_update_available() {
+                        error!("Failed to show update menu item: {e:?}");
+                    }
+                }
+            }
+        }
+
         // This will be called at least every second
         if self.last_update.elapsed() > Duration::from_millis(1000) {
             if let Err(e) = self.update(event_loop) {
