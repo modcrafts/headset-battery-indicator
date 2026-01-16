@@ -1,6 +1,6 @@
 # Headset Battery Indicator
 
-Adds a small icon to the "system tray" area of the Windows task bar, which displays the battery level of most* connected wireless headsets.
+Adds a small icon to the Windows task bar, displaying the battery level of most* connected wireless headphones.
 
 ![Screenshot of indicator on Windows task bar](docs/icon-screenshot.png)
 
@@ -55,11 +55,13 @@ Then, clone this repository and copy the `headsetcontrol.exe` file into the proj
 
 Finally, from the `headset-battery-indicator` folder, you can:
 
-* Run the application: `cargo run --release`
+* Run the application in release mode: `cargo run --release`
 
-* Install the application locally: `cargo install`
+* Run the application in debug mode: `cargo run`
 
 * Debug the application by pressing `F5` in VS Code with the Rust Analyzer and CodeLLDB extensions installed.
+
+* Build the installer: install [Inno Setup Compiler](https://jrsoftware.org/isinfo.php), open [installer.iss](installer.iss) and click "Compile".
 
 ### Translations
 
