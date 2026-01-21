@@ -26,8 +26,8 @@ Headset Battery Indicator depends on [Sapd/HeadsetControl](https://github.com/Sa
 * Download the [latest release](https://github.com/aarol/headset-battery-indicator/releases/latest) and run the installer
 
 > Running the installer may result in a Windows defender SmartScreen warning. This happens to all executables that don't have a large enough install count. There's no way around it other than paying hundreds of dollars every year for a signed certificate from Microsoft :(
-
-  Additionally, sometimes Windows Defender's ML-based antivirus falsely detects the program as a virus, most commonly Wacatac.b!ml (the "ml" at the end signifies machine learning).
+> 
+>Additionally, sometimes Windows Defender's ML-based antivirus falsely detects the program as a virus, most commonly `Wacatac.b!ml` (the "ml" at the end signifies machine learning).
 
 ## Security
 
@@ -78,7 +78,7 @@ Translations can be added to the [lang.rs](./src/lang.rs) file.
 
 ## Adding a new headset
 
-Since version 3.0.0, the program gets the battery status by using [Sapd/HeadsetControl](https://github.com/Sapd/HeadsetControl). If the headset you're using isn't currently supported, you can either wait if someone else adds support for it, or try adding it yourself.
+Headset Battery Indicator depends on [Sapd/HeadsetControl](https://github.com/Sapd/HeadsetControl) for supporting many kinds of headset models. If the headset you're using isn't currently supported, you can either wait until someone else adds support for it, or try adding it yourself.
 
 Reading the [HeadsetControl wiki](https://github.com/Sapd/HeadsetControl/wiki/Development-1-%E2%80%90-Adding-a-device) is the best resource on this.
 
