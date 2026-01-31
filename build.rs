@@ -113,7 +113,7 @@ fn build_hidapi() {
 /// Configuration:
 /// - C++20 standard (required for modern C++ features)
 /// - Dynamic CRT (/MD) for minimal binary size  
-/// - Optimized for size and speed (/O2)
+/// - Optimized for size (/O1)
 /// - MSVC-specific flags for C++20 conformance
 fn build_headsetcontrol() {
     println!("cargo:rerun-if-changed=vendor/headsetcontrol/lib");

@@ -51,6 +51,6 @@ jobs:
         with:
           files: |
             Output/HeadsetBatteryIndicatorSetup.exe
-          body_path: "changelog/$tag.md"
+          body_path: "changelog/${{github.ref_name}}.md"
           draft: true
           name: Release ${{github.ref_name}}

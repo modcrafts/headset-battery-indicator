@@ -19,7 +19,7 @@ Adds a small icon to the Windows task bar, displaying the battery level of most*
 
 * Shows notifications on low battery level or when finished charging (optional)
 
-Headset Battery Indicator depends on [Sapd/HeadsetControl](https://github.com/Sapd/HeadsetControl), which is licensed under GPL v3.
+Headset Battery Indicator depends on [HeadsetControl](https://github.com/Sapd/HeadsetControl), which is licensed under GPL v3.
 
 ## Installation
 
@@ -49,17 +49,18 @@ Your headset might be unsupported due to being a new model. See [Adding a new he
 
 ## Development
 
+This project depends on a number of Rust crates, and additionally [hidapi](https://github.com/libusb/hidapi) and [HeadsetControl](https://github.com/Sapd/HeadsetControl) which are stored as submodules in the [vendor](./vendor/) directory. Those C/C++ projects are built in [build.rs](./build.rs) using the `cc` crate.
 Rust and Cargo need to be installed. Additionally, this project builds HeadsetControl as a library (see [build.rs](./build.rs)). Visual Studio 2019 or later with "Desktop development with C++","Windows SDK" and "MSVC .. C++ x64/x86 build tools" workloads.
 
-First, clone this repository:
+To develop this project, first clone this repository:
 
 ```sh
 git clone https://github.com/aarol/headset-battery-indicator --recursive
 ```
 
-The `--recursive` flag is **important** since the project also contains hidapi and HeadsetControl as Git submodules in the [vendor](./vendor/) directory.
+Remember to use `--recursive` to clone the submodules as well.
 
-Finally, from the `headset-battery-indicator` folder, you can:
+Then, from the `headset-battery-indicator` folder, you can:
 
 * Run the application in release mode: `cargo run --release`
 
