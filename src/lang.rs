@@ -2,7 +2,6 @@ pub fn t(key: Key) -> &'static str {
     use Key::*;
     match *LANG {
         Lang::En => match key {
-            battery_remaining => "remaining",
             no_adapter_found => "No headphone adapter found",
             view_logs => "View logs",
             quit_program => "Close",
@@ -15,7 +14,6 @@ pub fn t(key: Key) -> &'static str {
             update_available => "Update available",
         },
         Lang::Fi => match key {
-            battery_remaining => "jäljellä",
             no_adapter_found => "Kuulokeadapteria ei löytynyt",
             view_logs => "Näytä lokitiedostot",
             quit_program => "Sulje",
@@ -28,7 +26,6 @@ pub fn t(key: Key) -> &'static str {
             update_available => "Päivitys saatavilla",
         },
         Lang::De => match key {
-            battery_remaining => "verbleibend",
             no_adapter_found => "Kein Kopfhöreradapter gefunden",
             view_logs => "Protokolle anzeigen",
             quit_program => "Beenden",
@@ -41,7 +38,6 @@ pub fn t(key: Key) -> &'static str {
             update_available => "Update verfügbar",
         },
         Lang::It => match key {
-            battery_remaining => "rimanente",
             no_adapter_found => "Nessun adattatore per cuffie trovato",
             view_logs => "Visualizza file di log",
             quit_program => "Chiudi",
@@ -54,7 +50,6 @@ pub fn t(key: Key) -> &'static str {
             update_available => "Aggiornamento disponibile",
         },
         Lang::Pt => match key {
-            battery_remaining => "restante",
             no_adapter_found => "Não foi encontrado adaptador de auscultadores",
             view_logs => "Ver registos",
             quit_program => "Fechar",
@@ -80,7 +75,6 @@ pub enum Lang {
 
 #[allow(non_camel_case_types)]
 pub enum Key {
-    battery_remaining,
     no_adapter_found,
     view_logs,
     quit_program,

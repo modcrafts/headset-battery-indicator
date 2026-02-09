@@ -94,10 +94,9 @@ impl std::fmt::Display for Device {
         if self.battery.level_percent > 0 {
             write!(
                 f,
-                "{name}: {battery}% {remaining}",
+                "{name}: {battery}%",
                 name = self.product_name,
                 battery = self.battery.level_percent,
-                remaining = lang::t(battery_remaining)
             )?;
         } else {
             write!(f, "{}", self.product_name)?;
