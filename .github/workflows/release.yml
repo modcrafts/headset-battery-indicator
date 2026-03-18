@@ -26,21 +26,21 @@ jobs:
       - run: ISCC ./installer.iss
             # result in ./Output/HeadsetBatteryIndicatorSetup.exe
 
-      - name: Sign executable
-        env:
-          CERTIFICATE_PFX_BASE64: ${{ secrets.CERTIFICATE_PFX_BASE64 }}
-          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-        shell: pwsh
-        run: |
-          # Decode and save certificate
-          [Convert]::FromBase64String($env:CERTIFICATE_PFX_BASE64) | Set-Content -Path certificate_from_secret.pfx -AsByteStream
+      # - name: Sign executable
+      #   env:
+      #     CERTIFICATE_PFX_BASE64: ${{ secrets.CERTIFICATE_PFX_BASE64 }}
+      #     CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+      #   shell: pwsh
+      #   run: |
+      #     # Decode and save certificate
+      #     [Convert]::FromBase64String($env:CERTIFICATE_PFX_BASE64) | Set-Content -Path certificate_from_secret.pfx -AsByteStream
 
-          # Sign the executable
-          $SignTool = Get-ChildItem -Path "C:\\Program Files*\\Windows Kits\\*\\bin\\*\\x64\\signtool.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
-          $SignToolPath = $SignTool.FullName
-          & $SignToolPath sign /f certificate_from_secret.pfx /p $env:CERTIFICATE_PASSWORD /tr http://timestamp.digicert.com /td sha256 /fd sha256 "Output/HeadsetBatteryIndicatorSetup.exe"
-          # Clean up certificate
-          Remove-Item certificate_from_secret.pfx
+      #     # Sign the executable
+      #     $SignTool = Get-ChildItem -Path "C:\\Program Files*\\Windows Kits\\*\\bin\\*\\x64\\signtool.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+      #     $SignToolPath = $SignTool.FullName
+      #     & $SignToolPath sign /f certificate_from_secret.pfx /p $env:CERTIFICATE_PASSWORD /tr http://timestamp.digicert.com /td sha256 /fd sha256 "Output/HeadsetBatteryIndicatorSetup.exe"
+      #     # Clean up certificate
+      #     Remove-Item certificate_from_secret.pfx
 
       - name: Attest Build Provenance
         uses: actions/attest-build-provenance@v2
